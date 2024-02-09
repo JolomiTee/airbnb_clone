@@ -28,7 +28,7 @@ const Modal: React.FC<ModalProps> = ({
 	secondaryActionLabel,
 }) => {
    const [showModal, setShowModal] = useState(isOpen);
-   
+
 	useEffect(() => {
 		setShowModal(isOpen);
 	}, [isOpen]);
@@ -102,7 +102,8 @@ const Modal: React.FC<ModalProps> = ({
 										disabled={disabled}
 										onClick={handleSubmit}
 									/>
-								</div>
+                        </div>
+                        {footer}
 							</div>
 						</div>
 					</div>
