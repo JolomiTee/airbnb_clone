@@ -1,5 +1,4 @@
 "use client";
-import axios from "axios";
 import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { useCallback, useState } from "react";
@@ -28,7 +27,8 @@ const LoginModal = () => {
 			email: "",
 			password: "",
 		},
-	});
+   });
+
 	const onSubmit: SubmitHandler<FieldValues> = (data) => {
 		setIsLoading(true);
 		signIn("credentials", {
@@ -52,7 +52,7 @@ const LoginModal = () => {
 
 	const bodyContent = (
 		<div className="flex flex-col gap-4">
-			<Heading title="Welcome back" subtitle="login to your account" />
+			<Heading title="Welcome back" subtitle="Login to your account" />
 			<Inputs
 				id="email"
 				label="Email"
@@ -86,7 +86,7 @@ const LoginModal = () => {
 				outline
 				label="Continue with Github"
 				icon={AiFillGithub}
-				onClick={() => {}}
+				onClick={() => signIn('github')}
 			/>
 			<div className="text-neutral-500 text-center mt-4 font-light">
 				<div className="flex justify-center flex-row items-center gap-2">
