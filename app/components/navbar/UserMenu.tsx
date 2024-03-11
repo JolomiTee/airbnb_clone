@@ -15,7 +15,7 @@ interface UserMenuProps {
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 	const registerModal = useRegisterModal();
-	const loginModel = useLoginModal();
+	const loginModal = useLoginModal();
 	const [isOpen, setIsOpen] = useState(false);
 
 	const toggleOpen = useCallback(() => {
@@ -56,7 +56,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 							</>
 						) : (
 							<>
-								<MenuItem onClick={loginModel.onOpen} label="Login" />
+								<MenuItem onClick={loginModal.onOpen} label="Login" />
 								<MenuItem onClick={registerModal.onOpen} label="Sign up" />
 							</>
 						)}
