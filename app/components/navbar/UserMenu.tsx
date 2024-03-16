@@ -16,7 +16,7 @@ interface UserMenuProps {
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 	const registerModal = useRegisterModal();
 	const loginModal = useLoginModal();
-	const rentModel = useRentModal();
+	const rentModal = useRentModal();
 	const [isOpen, setIsOpen] = useState(false);
 
 	const toggleOpen = useCallback(() => {
@@ -28,8 +28,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 			return loginModal.onOpen();
 		}
       // open rent modal
-      rentModel.onOpen()
-	}, [currentUser, loginModal, rentModel]);
+      rentModal.onOpen()
+	}, [currentUser, loginModal, rentModal]);
 
 	return (
 		<div className="relative">
@@ -59,7 +59,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 								<MenuItem onClick={() => {}} label="My favourites" />
 								<MenuItem onClick={() => {}} label="My properties" />
 								<MenuItem onClick={() => {}} label="My reservations" />
-								<MenuItem onClick={() => {}} label="Airbnb my home" />
+								<MenuItem onClick={rentModal.onOpen} label="Airbnb my home" />
 								<hr />
 								<MenuItem onClick={() => signOut()} label="Logout" />
 							</>
