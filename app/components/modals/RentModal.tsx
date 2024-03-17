@@ -6,6 +6,7 @@ import Heading from "../Heading";
 import { categories } from "../navbar/Categories";
 import CategoryInput from "../Inputs/CategoryInput";
 import { FieldValues, useForm } from "react-hook-form";
+import { TbRuler2Off } from "react-icons/tb";
 
 const RentModal = () => {
 	const rentModal = useRentModal();
@@ -39,8 +40,16 @@ const RentModal = () => {
 			title: "",
 			description: "",
 		},
-	});
+   });
 
+   const category = watch('category')
+   const setCustomValue = (id: string, value: any) => {
+      setValue(id, value, {
+         shouldDirty: true,
+         shouldValidate: true,
+         shouldTouch: true
+      })
+   }
 	const onBack = () => {
 		setStep((value) => value + 1);
 	};
@@ -76,8 +85,8 @@ const RentModal = () => {
 					<div key={item.label} className="col-span-1">
 						{item.label}
 						<CategoryInput
-							onclick={() => {}}
-							selected={false}
+							onclick={(category) => {setCustomValue('category', category)}}
+							selected={category === item.label}
 							label={item.label}
 							icon={item.icon}
 						/>
@@ -85,12 +94,15 @@ const RentModal = () => {
 				))}
 			</div>
 		</div>
-	);
+   );
+
+
 
 	return (
 		<Modal
 			isOpen={rentModal.isOpen}
-			title="Airbnb your home"
+         title="Airbnb your home"
+         body={bodyContent}
 			onClose={rentModal.onClose}
 			onSubmit={rentModal.onClose}
 			actionLabel={actionLabel}

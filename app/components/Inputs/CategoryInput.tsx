@@ -23,7 +23,7 @@ const CategoryInput: React.FC<CategoryInputProps> = ({
 			onClick={() => onclick(label)}
 		>
 			<Icon size={30} />
-			<div className="font-semibold">{label}</div>
+			<span className="font-semibold">{label}</span>
 		</div>
 	);
 };
