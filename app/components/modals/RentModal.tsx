@@ -7,7 +7,7 @@ import { categories } from "../navbar/Categories";
 import CategoryInput from "../Inputs/CategoryInput";
 import { FieldValues, useForm } from "react-hook-form";
 import CountrySelect from "../Inputs/CountrySelect";
-import Map from "../Map";
+import dynamic from "next/dynamic";
 
 const RentModal = () => {
 	const rentModal = useRentModal();
@@ -18,8 +18,8 @@ const RentModal = () => {
 		INFO = 2,
 		IMAGES = 3,
 		DESCRIPTION = 4,
-      PRICE = 5,
-      // REVIEW= 6,
+		PRICE = 5,
+		// REVIEW= 6,
 	}
 	const [step, setStep] = useState(STEPS.CATEGORY);
 
@@ -46,6 +46,14 @@ const RentModal = () => {
 
 	const category = watch("category");
 	const location = watch("location");
+
+	const Map = useMemo(
+		() =>
+			dynamic(() => import("../Map"), {
+				ssr: false,
+			}),
+		[location]
+	);
 
 	const setCustomValue = (id: string, value: any) => {
 		setValue(id, value, {
@@ -113,9 +121,9 @@ const RentModal = () => {
 				<CountrySelect
 					value={location}
 					onChange={(value) => setCustomValue("location", value)}
-            />
+				/>
 
-            <Map />
+				<Map center={location?.latlng} />
 			</div>
 		);
 	}
