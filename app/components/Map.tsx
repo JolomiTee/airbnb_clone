@@ -20,9 +20,7 @@ interface MapProps {
 	center?: number[];
 }
 
-const Map: React.FC<MapProps> = ({
-   center
-}) => {
+const Map: React.FC<MapProps> = ({ center }) => {
 	return (
 		<MapContainer
 			center={(center as L.LatLngExpression) || [9.05785, 7.49508]}
@@ -30,8 +28,8 @@ const Map: React.FC<MapProps> = ({
 			scrollWheelZoom={false}
 			className="h-[35vh] rounded-lg"
 		>
-         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-         {center && (<Marker position={center as L.LatLngExpression} />)}
+			<TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+			{center && <Marker position={center as L.LatLngExpression} />}
 		</MapContainer>
 	);
 };
