@@ -7,6 +7,7 @@ import { categories } from "../navbar/Categories";
 import CategoryInput from "../Inputs/CategoryInput";
 import { FieldValues, useForm } from "react-hook-form";
 import CountrySelect from "../Inputs/CountrySelect";
+import Map from "../Map";
 
 const RentModal = () => {
 	const rentModal = useRentModal();
@@ -112,7 +113,9 @@ const RentModal = () => {
 				<CountrySelect
 					value={location}
 					onChange={(value) => setCustomValue("location", value)}
-				/>
+            />
+
+            <Map />
 			</div>
 		);
 	}
