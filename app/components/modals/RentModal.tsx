@@ -6,7 +6,7 @@ import Heading from "../Heading";
 import { categories } from "../navbar/Categories";
 import CategoryInput from "../Inputs/CategoryInput";
 import { FieldValues, useForm } from "react-hook-form";
-import { TbRuler2Off } from "react-icons/tb";
+import CountrySelect from "../Inputs/CountrySelect";
 
 const RentModal = () => {
 	const rentModal = useRentModal();
@@ -17,7 +17,8 @@ const RentModal = () => {
 		INFO = 2,
 		IMAGES = 3,
 		DESCRIPTION = 4,
-		PRICE = 5,
+      PRICE = 5,
+      // REVIEW= 6,
 	}
 	const [step, setStep] = useState(STEPS.CATEGORY);
 
@@ -40,18 +41,21 @@ const RentModal = () => {
 			title: "",
 			description: "",
 		},
-   });
+	});
 
-   const category = watch('category')
-   const setCustomValue = (id: string, value: any) => {
-      setValue(id, value, {
-         shouldDirty: true,
-         shouldValidate: true,
-         shouldTouch: true
-      })
-   }
+	const category = watch("category");
+	const location = watch("location");
+
+	const setCustomValue = (id: string, value: any) => {
+		setValue(id, value, {
+			shouldDirty: true,
+			shouldValidate: true,
+			shouldTouch: true,
+		});
+	};
+
 	const onBack = () => {
-		setStep((value) => value + 1);
+		setStep((value) => value - 1);
 	};
 
 	const onNext = () => {
@@ -85,7 +89,9 @@ const RentModal = () => {
 					<div key={item.label} className="col-span-1">
 						{item.label}
 						<CategoryInput
-							onclick={(category) => {setCustomValue('category', category)}}
+							onclick={(category) => {
+								setCustomValue("category", category);
+							}}
 							selected={category === item.label}
 							label={item.label}
 							icon={item.icon}
@@ -94,20 +100,33 @@ const RentModal = () => {
 				))}
 			</div>
 		</div>
-   );
+	);
 
-
+	if (step === STEPS.LOCATION) {
+		bodyContent = (
+			<div className="flex flex-col gap-8">
+				<Heading
+					title="Where is your place"
+					subtitle="Help guests find this place"
+				/>
+				<CountrySelect
+					value={location}
+					onChange={(value) => setCustomValue("location", value)}
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<Modal
 			isOpen={rentModal.isOpen}
-         title="Airbnb your home"
-         body={bodyContent}
 			onClose={rentModal.onClose}
-			onSubmit={rentModal.onClose}
+			onSubmit={onNext}
 			actionLabel={actionLabel}
 			secondaryActionLabel={secondarActionLabel}
 			secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
+			title="Airbnb your home"
+			body={bodyContent}
 		/>
 	);
 };
